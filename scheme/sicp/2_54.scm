@@ -1,0 +1,20 @@
+(define (len lst)
+  (define (_len lst init_len)
+    (cond ((null? lst) init_len)
+          (else (_len (cdr lst) (+ init_len 1)))))
+  (_len lst 0))
+
+(len '(1 2 3))
+(len '(3 1))
+
+(define (equal? lst1 lst2)
+  (cond ((not (= (len lst1) (len lst2))) 'false)
+        ((= (len lst1) (len lst2) 0) 'true)
+        ((eq? (car lst1) (car lst2)) (equal? (cdr lst1) (cdr lst2)))
+        (else 'false)))
+
+(equal? '(a b) '(a b))
+(equal? '() '())
+(equal? '(a b c) '(a b))
+(equal? '(a b) '(a b c))
+(equal? '(a b) '(b a))
